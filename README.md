@@ -29,17 +29,17 @@ Simple frontend using HTML, CSS, and JavaScript
  Folder Structure
 TASK/
 │
-├── app.py              # Main Flask backend application
-├── config_v1.json      # JSON configuration for dynamic form fields
-├── submissions.json    # Stores submitted form data
-├── requirements.txt    # Python dependencies
+├── app.py              
+├── config_v1.json      
+├── submissions.json    
+├── requirements.txt    
 │
 ├── templates/
-│   └── form.html       # HTML template for the dynamic form
+│   └── form.html       
 │
 └── static/
-    ├── style.css       # CSS for UI styling
-    └── script.js       # JavaScript for dynamic form rendering & validation
+    ├── style.css       
+    └── script.js       
 
  How to Run the Project
 Step 1: Install Python
