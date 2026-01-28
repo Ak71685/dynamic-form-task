@@ -99,15 +99,22 @@ User input data
 
 ** Design Approach
 
-1.Backend (Flask) reads JSON configuration file
-2.Frontend (JavaScript) dynamically creates the form
-3.Backend validates data before saving
-4.Required fields are validated
-5.Optional fields are ignored if empty
+Backend (Flask) reads JSON configuration file
+
+Frontend (JavaScript) dynamically creates the form
+
+Backend validates data before saving
+
+Required fields are validated
+
+Optional fields are ignored if empty
 
 ** Future Improvements
 
-1.Store data in database (MySQL / SQLite)
-2.Add authentication (login system)
-3.Improve UI using Bootstrap
-4.Add admin panel to view submissions
+Store data in database (MySQL / SQLite)
+
+Add authentication (login system)
+
+Improve UI using Bootstrap
+
+Add admin panel to view submissions
