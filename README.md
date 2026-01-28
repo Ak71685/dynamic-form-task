@@ -1,39 +1,48 @@
-                                                                           Dynamic Form Project (Flask)
-**Project Overview**
+ Dynamic Form Project (Flask)
+ Project Overview:
+
 This project is a dynamic form web application built using Python Flask.
-The form fields are generated dynamically from a JSON configuration file, so new fields can be added without changing the frontend code.
+The form fields are generated dynamically from a JSON configuration file, which means new fields can be added without changing frontend code.
 
-The project demonstrates:
+This project demonstrates:
 
-1.Backend and frontend integration
-2.Config-driven UI generation
-3.Input validation
-4.Data storage using JSON
+Backend and frontend integration
 
-Features:
+Config-driven UI generation
 
-1.Dynamic form rendering using JSON config file
-2.Conditional field visibility (GST field appears only if business owner is selected)
-3.Form validation (required fields, email format, min/max length)
-4.Stores submitted data in a JSON file
-5.Simple frontend using HTML, CSS, and JavaScript
+Input validation
 
-#Folder Structure:
+Data storage using JSON
+
+* Features:
+
+Dynamic form rendering using JSON config file
+
+Conditional field visibility (GST field appears only if business owner is selected)
+
+Form validation (required fields, email format, min/max length)
+
+Stores submitted data in a JSON file
+
+Simple frontend using HTML, CSS, and JavaScript
+
+ Folder Structure
 TASK/
 │
-├── app.py            
-├── config_v1.json      
-├── submissions.json   
-├── requirements.txt   
+├── app.py              # Main Flask backend application
+├── config_v1.json      # JSON configuration for dynamic form fields
+├── submissions.json    # Stores submitted form data
+├── requirements.txt    # Python dependencies
 │
 ├── templates/
-│   └── form.html       
+│   └── form.html       # HTML template for the dynamic form
 │
 └── static/
-    ├── style.css       
-    └── script.js       
+    ├── style.css       # CSS for UI styling
+    └── script.js       # JavaScript for dynamic form rendering & validation
 
-* Step 1: Install Python
+ How to Run the Project
+Step 1: Install Python
 
 Make sure Python 3 is installed on your system.
 
@@ -41,23 +50,23 @@ Check version:
 
 python --version
 
-* Step 2: Install dependencies
+Step 2: Install Dependencies
 
-Run: pip install flask
+Run:
+pip install flask
 
-* Step 3: Run the server
+Step 3: Run the Server
 
-Go to project folder and run:
+Go to the project folder and run:
 
 python app.py
 
-
-* Step 4: Open in browser
+Step 4: Open in Browser
 
 Open:
-http://127.0.0.1:5000 (Port number)
+http://127.0.0.1:5000
 
-*** Configuration File
+ Configuration File
 
 Form fields are defined in:
 
@@ -73,24 +82,30 @@ Example:
   "regex": "^[^@]+@[^@]+\\.[^@]+$"
 }
 
-
-* Output
+ Output
 
 Submitted form data is saved in:
 
 submissions.json
 
-Each submission is stored with a unique ID and timestamp.
 
-*** Design Approach
+Each submission is stored with:
 
-1.Backend (Flask) reads JSON config and sends it to frontend
-2.Frontend (JavaScript) creates form dynamically
+Unique ID
+
+Timestamp
+
+User input data
+
+** Design Approach
+
+1.Backend (Flask) reads JSON configuration file
+2.Frontend (JavaScript) dynamically creates the form
 3.Backend validates data before saving
 4.Required fields are validated
 5.Optional fields are ignored if empty
 
-Future Improvements
+** Future Improvements
 
 1.Store data in database (MySQL / SQLite)
 2.Add authentication (login system)
