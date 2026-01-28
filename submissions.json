@@ -1,0 +1,40 @@
+[
+  {
+    "submissionId": "aab08fe5-636d-4658-987f-f2699cbef98c",
+    "formVersion": "v1",
+    "timestamp": "2026-01-28T21:16:29.168258",
+    "values": {
+      "fullName": "Arohi Kumar",
+      "email": "raj752902@gmail.com",
+      "age": "23",
+      "isBusiness": true,
+      "gstNumber": "8563945"
+    },
+    "visibleFieldIds": [
+      "fullName",
+      "email",
+      "age",
+      "isBusiness",
+      "gstNumber"
+    ]
+  },
+  {
+    "submissionId": "5df35112-be0e-40e2-bd43-d13385665779",
+    "formVersion": "v1",
+    "timestamp": "2026-01-28T21:52:34.807833",
+    "values": {
+      "fullName": "Ms Dhoni",
+      "email": "raj752902@gmail.com",
+      "age": "42",
+      "isBusiness": true,
+      "gstNumber": ""
+    },
+    "visibleFieldIds": [
+      "fullName",
+      "email",
+      "age",
+      "isBusiness",
+      "gstNumber"
+    ]
+  }
+]
