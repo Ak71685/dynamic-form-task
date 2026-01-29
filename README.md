@@ -81,15 +81,7 @@ Each config contains:
 
 Example:
 ```json
-{
-  "id": "email",
-  "label": "Email",
-  "type": "text",
-  "required": true,
-  "validation": {
-    "regex": "^[^@]+@[^@]+\\.[^@]+$"
-  }
-}
+
 How to Switch Config Versions
 
 To switch form versions:
@@ -105,8 +97,10 @@ Change it to:
 
 DEFAULT_CONFIG_KEY = "config_v2"
 
-Design Decisions & Tradeoffs
-Decisions
+
+*** Design Decisions & Tradeoffs
+
+**Decisions
 
 Used JSON instead of database for form structure to keep system flexible
 
@@ -116,7 +110,7 @@ Stored submissions in submissions.json to avoid database dependency
 
 Performed validation on both frontend (JavaScript) and backend (Flask)
 
-Tradeoffs
+**Tradeoffs
 
 JSON file storage is simple but not scalable for large data
 
@@ -126,7 +120,7 @@ UI is kept simple to focus on functionality
 
 No concurrency handling for file writes (single-user assumption)
 
-Assumptions
+** Assumptions
 
 Single user or low traffic usage
 
@@ -140,31 +134,3 @@ No authentication is required
 
 Form fields are controlled only via config file
 
-Output
-
-Submitted form data is stored in:
-
-submissions.json
-
-
-Each submission contains:
-
-submissionId
-
-timestamp
-
-form version
-
-field values
-
-Future Improvements
-
-Store data in database (MySQL / SQLite)
-
-Add authentication system
-
-Improve UI using Bootstrap
-
-Add export to CSV feature
-
-Add pagination in admin panel
