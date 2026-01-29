@@ -30,7 +30,7 @@ TASK/
 ├── config_v1.json
 ├── config_v2.json
 ├── submissions.json
-├── requirements.txt
+
 │
 ├── templates/
 │ ├── form.html
