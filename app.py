@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# Config files (multiple versions supported)
 CONFIGS = {
     "config_v1": BASE_DIR / "config_v1.json",
     "config_v2": BASE_DIR / "config_v2.json",
@@ -58,6 +57,8 @@ def coerce_value(field: dict, raw_value):
     if field_type == "checkbox":
         if isinstance(raw_value, bool):
             return raw_value, None
+        if raw_value in ("true", "false"):
+            return raw_value == "true", None
         return False, None
 
     if field_type == "number":
@@ -81,8 +82,12 @@ def validate_field(field: dict, value, *, is_visible: bool):
     validation = field.get("validation", {})
 
     if required:
-        if value in (None, "", False):
-            return "This field is required"
+        if field.get("type") == "checkbox":
+            if value is not True:
+                return "This field is required"
+        else:
+            if value in (None, "", False):
+                return "This field is required"
 
     if value in (None, "", False) and not required:
         return None
@@ -104,8 +109,11 @@ def validate_field(field: dict, value, *, is_visible: bool):
 
     regex = validation.get("regex")
     if regex:
-        if re.match(regex, str(value)) is None:
-            return "Invalid format"
+        try:
+            if re.match(regex, str(value)) is None:
+                return "Invalid format"
+        except re.error:
+            return None
 
     return None
 
@@ -120,21 +128,6 @@ def admin_page():
     return render_template("admin.html")
 
 
-# 🔹 List all configs (for dropdown)
-@app.route("/api/configs", methods=["GET"])
-def list_configs():
-    configs = []
-    for key, path in CONFIGS.items():
-        cfg = _read_json_file(path, {})
-        configs.append({
-            "key": key,
-            "version": cfg.get("version"),
-            "title": cfg.get("title")
-        })
-    return jsonify({"configs": configs, "default": DEFAULT_CONFIG_KEY})
-
-
-# 🔹 Get selected form config
 @app.route("/api/form-config", methods=["GET"])
 def get_form_config():
     config_key = request.args.get("configKey") or DEFAULT_CONFIG_KEY
@@ -145,14 +138,37 @@ def get_form_config():
     return jsonify(config)
 
 
+@app.route("/api/configs", methods=["GET"])
+def list_configs():
+    configs = []
+    for key in CONFIGS.keys():
+        try:
+            cfg = load_config(key)
+            configs.append(
+                {
+                    "key": key,
+                    "version": cfg.get("version"),
+                    "title": cfg.get("title"),
+                }
+            )
+        except Exception:
+            continue
+    return jsonify({"configs": configs, "default": DEFAULT_CONFIG_KEY})
+
+
 @app.route("/api/submit", methods=["POST"])
 def submit_form():
-    data = request.get_json() or {}
+    data = request.get_json(silent=True) or {}
     values = data.get("values") or {}
     config_key = data.get("configKey") or DEFAULT_CONFIG_KEY
 
-    config = load_config(config_key)
+    try:
+        config = load_config(config_key)
+    except Exception:
+        return jsonify({"message": "Invalid config"}), 400
+
     fields = config.get("fields", [])
+    field_map = get_field_map(config)
 
     coerced = {}
     errors = {}
@@ -188,7 +204,7 @@ def submit_form():
         "formVersion": config.get("version"),
         "timestamp": datetime.now().isoformat(),
         "values": stored_values,
-        "configKey": config_key
+        "configKey": config_key,
     }
 
     existing = _read_json_file(SUBMISSION_FILE, [])
@@ -206,9 +222,35 @@ def submit_form():
 @app.route("/api/submissions", methods=["GET"])
 def get_submissions():
     data = _read_json_file(SUBMISSION_FILE, [])
-    return jsonify(data)
+    if not isinstance(data, list):
+        data = []
 
-@app.route("/api/submissions/<submission_id>")
+    q = (request.args.get("q") or "").strip().lower()
+    field_id = (request.args.get("fieldId") or "").strip()
+
+    def matches(sub):
+        if not q:
+            return True
+
+        values = sub.get("values", {})
+        if not isinstance(values, dict):
+            return False
+
+        if field_id:
+            return q in str(values.get(field_id, "")).lower()
+
+        for v in values.values():
+            if q in str(v).lower():
+                return True
+        return False
+
+    filtered = [s for s in data if matches(s)]
+
+    filtered.sort(key=lambda x: x.get("timestamp", ""), reverse=True)
+    return jsonify(filtered)
+
+
+@app.route("/api/submissions/<submission_id>", methods=["GET"])
 def get_submission_detail(submission_id):
     data = _read_json_file(SUBMISSION_FILE, [])
     if not isinstance(data, list):
@@ -219,7 +261,6 @@ def get_submission_detail(submission_id):
             return jsonify(sub)
 
     return jsonify({"message": "Not found"}), 404
-
 
 
 if __name__ == "__main__":
