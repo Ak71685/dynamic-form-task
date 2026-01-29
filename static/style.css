@@ -1,8 +1,9 @@
+/* ========== Global ========== */
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
   min-height: 100vh;
 
   display: flex;
@@ -10,36 +11,76 @@ body {
   align-items: center;
 }
 
-/* Main white form box */
+/* ========== Containers ========== */
 .form-container {
-  background: white;
+  background: #ffffff;
   padding: 25px 35px;
   border-radius: 12px;
   width: 100%;
   max-width: 380px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Heading */
+.admin-container {
+  background: #ffffff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 980px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Headings ========== */
 h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Each field block */
-div {
+/* ========== Layout Helpers ========== */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 12px;
 }
 
-/* Labels */
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.config-row {
+  margin-bottom: 12px;
+}
+
+.subtle {
+  font-size: 12px;
+  color: #555;
+}
+
+.link {
+  color: #155724;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ========== Form Fields ========== */
+.field {
+  margin-bottom: 12px;
+}
+
 label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-/* Inputs & select */
-input, select {
+input,
+select {
   width: 100%;
   padding: 7px;
   border-radius: 5px;
@@ -47,17 +88,16 @@ input, select {
   font-size: 14px;
 }
 
-/* Checkbox align */
 input[type="checkbox"] {
   width: auto;
 }
 
-/* Submit button */
+/* ========== Buttons ========== */
 button {
   width: 100%;
   padding: 10px;
   background: #28a745;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -68,7 +108,7 @@ button:hover {
   background: #218838;
 }
 
-/* Success message */
+/* ========== Messages ========== */
 .success-message {
   background: #d4edda;
   color: #155724;
@@ -77,4 +117,104 @@ button:hover {
   margin-top: 10px;
   text-align: center;
   font-weight: bold;
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.field-error {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #721c24;
+}
+
+/* ========== Admin Layout ========== */
+.admin-search {
+  display: grid;
+  grid-template-columns: 1fr 2fr 140px;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.admin-actions button {
+  width: 100%;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list-item {
+  text-align: left;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  background: #ffffff;
+  color: #222;
+  cursor: pointer;
+}
+
+.list-item:hover {
+  border-color: #28a745;
+}
+
+.list-title {
+  font-size: 12px;
+  font-family: monospace;
+  margin-bottom: 6px;
+}
+
+.list-meta {
+  font-size: 12px;
+  color: #555;
+}
+
+.list-empty {
+  font-size: 13px;
+  color: #555;
+}
+
+.detail {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fafafa;
+  min-height: 220px;
+  overflow: auto;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .admin-container {
+    max-width: 420px;
+  }
+
+  .admin-search {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
 }

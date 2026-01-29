@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="admin-container">
+
+    <!-- Header -->
+    <div class="header-row">
+        <div>
+            <h2>Admin Panel</h2>
+            <div class="subtle">View and search submitted form data</div>
+        </div>
+
+        <div class="header-actions">
+            <a href="/" class="link">Back to Form</a>
+        </div>
+    </div>
+
+    <!-- Message -->
+    <p id="adminMessage"></p>
+
+    <!-- Search Row -->
+    <div class="admin-search">
+        <div>
+            <label for="searchQuery">Search value</label>
+            <input type="text" id="searchQuery" placeholder="Search (e.g. email or name)">
+        </div>
+
+        <div>
+            <label for="searchFieldId">Search by Field ID</label>
+            <input type="text" id="searchFieldId" placeholder="e.g. email, fullName">
+        </div>
+
+        <div class="admin-actions">
+            <button id="refreshBtn">Refresh</button>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="admin-grid">
+
+        <!-- Left: List -->
+        <div>
+            <div class="section-title">Submissions</div>
+            <div id="submissionsList" class="list"></div>
+        </div>
+
+        <!-- Right: Detail -->
+        <div>
+            <div class="section-title">Submission Detail</div>
+            <pre id="submissionDetail" class="detail"></pre>
+        </div>
+
+    </div>
+</div>
+
+<script src="/static/admin.js"></script>
+</body>
+</html>

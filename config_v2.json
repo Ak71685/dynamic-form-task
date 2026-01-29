@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "title": "Lead Capture Form",
+  "version": 2,
+  "title": "Lead Capture Form (v2)",
   "fields": [
     {
       "id": "fullName",
@@ -20,6 +20,16 @@
       "placeholder": "name@company.com",
       "validation": {
         "regex": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+      }
+    },
+    {
+      "id": "phone",
+      "label": "Phone Number",
+      "type": "text",
+      "required": false,
+      "placeholder": "Optional (10 digits)",
+      "validation": {
+        "regex": "^[0-9]{10}$"
       }
     },
     {
@@ -60,18 +70,9 @@
       "type": "select",
       "required": true,
       "options": [
-        {
-          "label": "Starter",
-          "value": "starter"
-        },
-        {
-          "label": "Growth",
-          "value": "growth"
-        },
-        {
-          "label": "Enterprise",
-          "value": "enterprise"
-        }
+        { "label": "Starter", "value": "starter" },
+        { "label": "Growth", "value": "growth" },
+        { "label": "Enterprise", "value": "enterprise" }
       ]
     }
   ]
