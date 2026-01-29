@@ -79,26 +79,14 @@ Each config contains:
 - title
 - fields array
 
-Example:
-```json
-
-How to Switch Config Versions
-
 To switch form versions:
-
 Open app.py
-
 Locate:
-
 DEFAULT_CONFIG_KEY = "config_v1"
-
-
 Change it to:
-
 DEFAULT_CONFIG_KEY = "config_v2"
 
-
-*** Design Decisions & Tradeoffs
+Design Decisions & Tradeoffs
 
 **Decisions
 
@@ -118,7 +106,7 @@ No authentication implemented for admin panel
 
 UI is kept simple to focus on functionality
 
-No concurrency handling for file writes (single-user assumption)
+No concurrency handling for file writes 
 
 ** Assumptions
 
@@ -133,4 +121,18 @@ Application is run locally (localhost)
 No authentication is required
 
 Form fields are controlled only via config file
+
+** Future Improvements
+
+Store data in database (MySQL / SQLite)
+
+Add authentication system
+
+Improve UI using Bootstrap
+
+Add export to CSV feature
+
+Add pagination in admin panel
+
+
 
