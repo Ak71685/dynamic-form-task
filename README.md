@@ -1,170 +1,138 @@
- Dynamic Form Project (Flask)
- Project Overview:
+# Dynamic Form Project (Flask)
 
-This project is a dynamic form web application built using Python Flask.
-The form fields are generated dynamically from a JSON configuration file, which means new fields can be added without changing frontend code.
+## Project Overview
+This project is a dynamic form web application built using Python Flask.  
+The form UI is generated dynamically from a JSON configuration file, which means new fields can be added or modified without changing the frontend code.
 
-This project demonstrates:
+The goal of this project is to demonstrate:
+- Backend and frontend integration
+- Config-driven UI generation
+- Input validation
+- Data storage using JSON
+- Simple admin panel to view submitted data
 
-Backend and frontend integration
+---
 
-Config-driven UI generation
+## Features
+- Dynamic form rendering using JSON config file  
+- Conditional field visibility (example: GST field appears only when Business Account is selected)  
+- Client-side and server-side validation  
+- Stores submitted form data in a JSON file  
+- Admin panel to view and search submissions  
+- Supports multiple form versions using different config files  
 
-Input validation
+---
 
-Data storage using JSON
-
-* Features:
-
-Dynamic form rendering using JSON config file
-
-Conditional field visibility (GST field appears only if business owner is selected)
-
-Form validation (required fields, email format, min/max length)
-
-Stores submitted data in a JSON file
-
-Simple frontend using HTML, CSS, and JavaScript
-
- Folder Structure
+## Folder Structure
 TASK/
 │
-├── app.py              
-├── config_v1.json      
-├── submissions.json    
-    
+├── app.py
+├── config_v1.json
+├── config_v2.json
+├── submissions.json
+├── requirements.txt
 │
 ├── templates/
-│   └── form.html       
+│ ├── form.html
+│ └── admin.html
 │
 └── static/
-    ├── style.css       
-    └── script.js       
+├── style.css
+├── script.js
+└── admin.js
 
- How to Run the Project
-Step 1: Install Python
 
-Make sure Python 3 is installed on your system.
+---
+
+## Setup Instructions
+
+### Step 1: Install Python
+Make sure Python 3 is installed.
 
 Check version:
 
-python --version
+---
 
-Step 2: Install Dependencies
+### Step 2: Install dependencies
 
-Run:
-pip install flask
+---
 
-Step 3: Run the Server
-
+### Step 3: Run the server
 Go to the project folder and run:
-
-python app.py
-
-Step 4: Open in Browser
-
-Open:
+### Step 4: Open in browser
+Form page:
 http://127.0.0.1:5000
 
- Configuration File
 
-Form fields are defined in:
+Admin panel:
+http://127.0.0.1:5000/admin
+---
 
-config_v1.json
+## Configuration Files
 
-Example:
+Form fields are defined in JSON files:
+- `config_v1.json`
+- `config_v2.json`
 
-{
-  "id": "email",
-  "label": "Email",
-  "type": "text",
-  "required": true,
-  "regex": "^[^@]+@[^@]+\\.[^@]+$"
-}
+Each config contains:
+- version
+- title
+- fields array
 
- Output
-
-Submitted form data is saved in:
-
-submissions.json
-
-
-Each submission is stored with:
-
-Unique ID
-
-Timestamp
-
-User input data
-
-** Design Approach
-
-Backend (Flask) reads JSON configuration file
-
-Frontend (JavaScript) dynamically creates the form
-
-Backend validates data before saving
-
-Required fields are validated
-
-Optional fields are ignored if empty
-
-*** How to Switch Config Versions
-
-If multiple config files are added (example: config_v2.json):
-
+To switch form versions:
 Open app.py
+Locate:
+DEFAULT_CONFIG_KEY = "config_v1"
+Change it to:
+DEFAULT_CONFIG_KEY = "config_v2"
 
-Change:
+Design Decisions & Tradeoffs
 
-CONFIG_FILE = "config_v1.json"
+**Decisions
 
+Used JSON instead of database for form structure to keep system flexible
 
-to:
+Used Flask for simplicity and readability
 
-CONFIG_FILE = "config_v2.json"
+Stored submissions in submissions.json to avoid database dependency
 
+Performed validation on both frontend (JavaScript) and backend (Flask)
 
-Restart server:
+**Tradeoffs
 
-python app.py
+JSON file storage is simple but not scalable for large data
 
-**Design Decisions & Trade-offs
+No authentication implemented for admin panel
 
-*Decisions:
+UI is kept simple to focus on functionality
 
-Used JSON instead of hardcoded HTML inputs for flexibility
-
-Used Flask for simple backend routing
-
-Used vanilla JavaScript for frontend logic
-
-Stored data in JSON file for simplicity
-
-* Trade-offs:
-
-JSON file used instead of database 
-
-No authentication implemented 
-
-Minimal UI 
+No concurrency handling for file writes 
 
 ** Assumptions
 
-Application will be run locally
+Single user or low traffic usage
 
-Single user usage at a time
+JSON config file structure is valid
 
-JSON config format will remain consistent
+Admin panel is used for demo/testing purposes
 
-Data size will be small 
+Application is run locally (localhost)
+
+No authentication is required
+
+Form fields are controlled only via config file
 
 ** Future Improvements
 
 Store data in database (MySQL / SQLite)
 
-Add authentication (login system)
+Add authentication system
 
 Improve UI using Bootstrap
 
-Add admin panel to view submissions
+Add export to CSV feature
+
+Add pagination in admin panel
+
+
+
