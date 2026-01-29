@@ -32,7 +32,7 @@ TASK/
 ├── app.py              
 ├── config_v1.json      
 ├── submissions.json    
-├── requirements.txt    
+    
 │
 ├── templates/
 │   └── form.html       
