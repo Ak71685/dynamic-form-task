@@ -109,6 +109,56 @@ Required fields are validated
 
 Optional fields are ignored if empty
 
+*** How to Switch Config Versions
+
+If multiple config files are added (example: config_v2.json):
+
+Open app.py
+
+Change:
+
+CONFIG_FILE = "config_v1.json"
+
+
+to:
+
+CONFIG_FILE = "config_v2.json"
+
+
+Restart server:
+
+python app.py
+
+**Design Decisions & Trade-offs
+
+*Decisions:
+
+Used JSON instead of hardcoded HTML inputs for flexibility
+
+Used Flask for simple backend routing
+
+Used vanilla JavaScript for frontend logic
+
+Stored data in JSON file for simplicity
+
+* Trade-offs:
+
+JSON file used instead of database 
+
+No authentication implemented 
+
+Minimal UI 
+
+** Assumptions
+
+Application will be run locally
+
+Single user usage at a time
+
+JSON config format will remain consistent
+
+Data size will be small 
+
 ** Future Improvements
 
 Store data in database (MySQL / SQLite)
